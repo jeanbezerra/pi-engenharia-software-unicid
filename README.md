@@ -1,4 +1,4 @@
-﻿# Projeto Integrador Transdisciplinar em Engenharia de Software II
+﻿# Projeto Integrador Transdisciplinar em Engenharia de Software
 ## pi-engenharia-software-unicid
 
 ## Descrição do Projeto
