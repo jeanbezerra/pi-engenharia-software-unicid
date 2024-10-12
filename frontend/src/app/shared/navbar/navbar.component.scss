@@ -1,0 +1,32 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.mobile-sidenav {
+  width: 250px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Esconde os botões de navegação em telas pequenas */
+.nav-button {
+  display: none;
+}
+
+/* Mostra os botões de navegação em telas maiores */
+@media (min-width: 768px) {
+  .nav-button {
+    display: inline-block;
+  }
+
+  /* Esconde o ícone de menu em telas grandes */
+  button[mat-icon-button] {
+    display: none;
+  }
+}
+
+mat-toolbar {
+  padding: 0 16px;
+}

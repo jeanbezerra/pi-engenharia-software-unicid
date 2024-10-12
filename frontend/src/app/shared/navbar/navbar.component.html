@@ -1,0 +1,37 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidenav para dispositivos móveis -->
+  <mat-sidenav #sidenav mode="over" class="mobile-sidenav" fixedInViewport>
+    <h3>Menu</h3>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home" (click)="sidenav.close()"><mat-icon>home</mat-icon> Home</a>
+      <a mat-list-item routerLink="/produtos" (click)="sidenav.close()"><mat-icon>cake</mat-icon> Produtos</a>
+      <a mat-list-item routerLink="/carrinho" (click)="sidenav.close()"><mat-icon>shopping_cart</mat-icon> Carrinho</a>
+      <a mat-list-item routerLink="/perfil" (click)="sidenav.close()"><mat-icon>person</mat-icon> Perfil</a>
+      <a mat-list-item routerLink="/login" (click)="sidenav.close()"><mat-icon>login</mat-icon> Login</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Toolbar -->
+  <mat-toolbar color="primary">
+    <!-- Ícone de menu para dispositivos móveis -->
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Título -->
+    <span>Loja de CupCakes</span>
+
+    <!-- Espaçador -->
+    <span class="spacer"></span>
+
+    <!-- Botões de navegação (somente visíveis em telas maiores) -->
+    <button mat-button routerLink="/home" class="nav-button"><mat-icon>home</mat-icon> Home</button>
+    <button mat-button routerLink="/produtos" class="nav-button"><mat-icon>cake</mat-icon> Produtos</button>
+    <button mat-button routerLink="/carrinho" class="nav-button"><mat-icon>shopping_cart</mat-icon> Carrinho</button>
+    <button mat-button routerLink="/perfil" class="nav-button"><mat-icon>person</mat-icon> Perfil</button>
+    <button mat-button routerLink="/login" class="nav-button"><mat-icon>login</mat-icon> Login</button>
+  </mat-toolbar>
+
+  <!-- Conteúdo principal -->
+  <router-outlet></router-outlet>
+</mat-sidenav-container>
