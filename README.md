@@ -2,7 +2,7 @@
 ## pi-engenharia-software-unicid
 
 ## Descrição do Projeto
-Este projeto faz parte da disciplina **Projeto Integrador Transdisciplinar II** do curso de Engenharia de Software. O objetivo principal é aplicar os conhecimentos adquiridos ao longo do curso para desenvolver uma solução completa de software, incluindo o front-end, back-end e banco de dados.
+Este projeto faz parte da disciplina **Projeto Integrador Transdisciplinar** do curso de Engenharia de Software. O objetivo principal é aplicar os conhecimentos adquiridos ao longo do curso para desenvolver uma solução completa de software, incluindo o front-end, back-end e banco de dados.
 
 ## Estrutura do Repositório
 
