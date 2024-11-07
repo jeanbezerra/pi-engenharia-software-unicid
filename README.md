@@ -1,4 +1,4 @@
-<img src="https://github.com/jeanbezerra/pi-engenharia-software-unicid/blob/master/docs/imgs/unicid-logo.svg" alt="Logo da Empresa" width="64px" style="color: black;" />
+<img src="https://github.com/jeanbezerra/pi-engenharia-software-unicid/blob/master/docs/imgs/unicid-logo.svg" alt="Logo da Empresa" width="256px" style="color: black;" />
 
 # Projeto Integrador Transdisciplinar em Engenharia de Software
 
