@@ -13,7 +13,7 @@ public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cliente_id", nullable = false, unique = true)
+	@Column(name = "cliente_id",unique = true)
 	private Long clienteId;
 
 	@Column(name = "nome", nullable = false)
