@@ -34,7 +34,11 @@
 		<project.build.sourceEncondig>UTF-8</project.build.sourceEncondig>
 		<project.reporting.outputEncondig>UTF-8</project.reporting.outputEncondig>
 
-		<spring-cloud.version>2023.0.3</spring-cloud.version>
+		<!-- SonarCloud -->
+		<sonar.organization>jeanbezerra</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+		<spring-cloud.version>2023.0.3</spring-cloud.version>  		
 	</properties>
 	<dependencies>
 		<dependency>
