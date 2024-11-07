@@ -1,4 +1,7 @@
-﻿# Projeto Integrador Transdisciplinar em Engenharia de Software
+![Logo da Empresa](https://www.unicid.edu.br/wp-content/themes/cruzeiroportais2019/assets/imagens/marcas/marcaUnicidVariacao.svg)
+
+# Projeto Integrador Transdisciplinar em Engenharia de Software
+
 ## pi-engenharia-software-unicid
 
 ## Descrição do Projeto
