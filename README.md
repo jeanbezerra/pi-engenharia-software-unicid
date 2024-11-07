@@ -1,4 +1,4 @@
-![Logo da Empresa](https://www.unicid.edu.br/wp-content/themes/cruzeiroportais2019/assets/imagens/marcas/marcaUnicidVariacao.svg)
+![Logo da Empresa](https://github.com/jeanbezerra/pi-engenharia-software-unicid/blob/master/docs/imgs/unicid-logo.svg)
 
 # Projeto Integrador Transdisciplinar em Engenharia de Software
 
