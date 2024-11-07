@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -28,9 +28,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**backend/ecommerce-bff-api/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pi-engenharia-software-unicid/backend/ecommerce-bff-api/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
+        working-directory: ./pi-engenharia-software-unicid/backend/ecommerce-bff-api
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
