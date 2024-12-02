@@ -16,16 +16,18 @@ Este projeto faz parte da disciplina **Projeto Integrador Transdisciplinar** do 
 
 ## Tecnologias Utilizadas
 
-- **Front-end**: HTML, CSS, JavaScript
-- **Back-end**: [Linguagem de programação usada] (ex: Java, PHP, Python, etc.)
-- **Banco de Dados**: MySQL / PostgreSQL
-- **Testes**: JUnit / PyTest / PHPUnit
-- **Controle de Versão**: Git + GitHub
+- **Front-end**: HTML, CSS, JavaScript, XHTML, Primefaces 13 (Jakarta EE), Java Server Faces 4, Bootstrap 4.6
+- **Back-end**: Java, Apache Shiro, Hibernate, HikariCP
+- **Banco de Dados**: PostgreSQL 17
+- **Testes**: JUnit 5
+- **Testes Não Funcionais**: Apache JMeter 5
+- **Controle de Versão**: Git SCM + GitHub
 - **Padrão de Arquitetura**: MVC (Model-View-Controller)
 
-## Instruções de Execução
+## Acesso a demonstração
 
-### 1. Clonar o Repositório
-```bash
-git clone https://github.com/jeanbezerra/pi-engenharia-software-unicid.git
-```
+--
+
+## Video de demonstração
+
+--
