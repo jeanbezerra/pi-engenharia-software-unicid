@@ -23,7 +23,7 @@
 
 			<!-- Botão para adicionar novo usuário -->
 			<p:commandButton value="Novo Usuário" icon="pi pi-plus" onstart="PF('dlg').show();" update=":userForm" />
-			<p:commandButton value="Atualizar" action="#{userManagerController.refreshData}" update="userTable" />
+			<p:commandButton value="Atualizar" action="#{userManagerController.refreshData}" update="userTable" icon="pi pi-refresh"/>
 
 			<!-- Tabela de usuários -->
 			<p:dataTable value="#{userManagerController.users}" var="user" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">

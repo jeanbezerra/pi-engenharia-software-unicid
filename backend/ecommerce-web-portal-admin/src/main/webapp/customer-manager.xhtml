@@ -20,9 +20,8 @@
 			<h1 class="display-4">Gerenciamento de Clientes</h1>
 			<br />
 			
-			<p:commandButton value="Novo Cliente"  icon="pi pi-plus" update="clienteForm" onstart="PF('dlg').show();" />
-			
-			<p:commandButton value="Atualizar" action="#{clienteController.reloadAll}" update="clienteTable"></p:commandButton>
+			<p:commandButton value="Novo Cliente"  icon="pi pi-plus" update="clienteForm" onstart="PF('dlg').show();" />			
+			<p:commandButton value="Atualizar" action="#{clienteController.reloadAll}" update="clienteTable" icon="pi pi-refresh"/>
 
 			<p:dataTable value="#{clienteController.clientes}" var="cliente" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
 				<p:column headerText="ID">

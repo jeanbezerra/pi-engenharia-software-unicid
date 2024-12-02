@@ -24,8 +24,8 @@
 			<br />
 
 
-			<p:commandButton value="Novo Pedido" action="#{pedidoController.gerarNovoPedido}" />
-			<p:commandButton value="Atualizar" action="#{pedidoController.reloadAll}" />
+			<p:commandButton value="Novo Pedido" action="#{pedidoController.gerarNovoPedido}" icon="pi pi-plus"/>
+			<p:commandButton value="Atualizar" action="#{pedidoController.reloadAll}" icon="pi pi-refresh"/>
 
 			<p:dataTable id="tabelaPedidos" value="#{pedidoController.pedidos}"
 				var="pedido" rowKey="#{pedido.pedidoId}" paginator="true" rows="10"
