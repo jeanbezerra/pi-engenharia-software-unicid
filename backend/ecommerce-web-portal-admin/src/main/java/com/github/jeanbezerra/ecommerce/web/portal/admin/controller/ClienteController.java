@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 
 import com.github.jeanbezerra.ecommerce.web.portal.admin.dao.ClienteDAO;
 import com.github.jeanbezerra.ecommerce.web.portal.admin.entity.Cliente;
@@ -36,7 +39,21 @@ public class ClienteController implements Serializable {
 
 	public void saveCliente() {
 		try {
-			clienteDAO.save(selectedCliente);
+			
+	        if (selectedCliente.getPassword() != null && !selectedCliente.getPassword().isEmpty()) {
+	            RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+	            Object salt = rng.nextBytes();
+	            String hashedPasswordBase64 = new Sha256Hash(selectedCliente.getPassword(), salt, 1024).toBase64();
+	            selectedCliente.setPassword(hashedPasswordBase64);
+	            selectedCliente.setPasswordSalt(salt.toString());
+	        }
+	        
+	        if (editMode) {
+	            clienteDAO.save(selectedCliente);
+	        } else {
+	            clienteDAO.save(selectedCliente);
+	        }        
+			
 			loadClientes(); // Recarrega a lista de clientes
 			resetForm(); // Reseta o formulário
 		} catch (Exception e) {
@@ -48,6 +65,14 @@ public class ClienteController implements Serializable {
 		try {
 			clienteDAO.delete(clienteId);
 			loadClientes(); // Recarrega a lista de clientes
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void reloadAll() {
+		try {
+			this.clientes = this.clienteDAO.findAll();			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

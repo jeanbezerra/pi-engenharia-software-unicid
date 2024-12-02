@@ -58,7 +58,7 @@ INSERT INTO clientes (nome, email, password,password_salt, endereco, telefone) V
 INSERT INTO clientes (nome, email, password,password_salt, endereco, telefone) VALUES ('Maria Oliveira', 'maria.oliveira@email.com', 'mGzR+aVLuPggFyrOQ3TaPuSI4eSWxpBm8zwcLlR6wTM=','4xtwkSCCnofFMsn4ngXHkA==', 'Avenida Brasil, 456 - Rio de Janeiro', '(21) 99999-1234');
 INSERT INTO users (id, name, password, password_salt, username) VALUES ('1a2b3c4d-5678-9101-1121-314151617181', 'João Silva', 'mGzR+aVLuPggFyrOQ3TaPuSI4eSWxpBm8zwcLlR6wTM=', '4xtwkSCcnoffMsn4ngXHkA==', 'joao.silva@email.com');
 INSERT INTO users (id, name, password, password_salt, username) VALUES ('2b3c4d5e-6789-1011-1213-141516171819', 'Maria Oliveira', 'mGzR+aVLuPggFyrOQ3TaPuSI4eSWxpBm8zwcLlR6wTM=', '4xtwkSCcnoffMsn4ngXHkA==', 'maria.oliveira@email.com');
-INSERT INTO users (id, name, password, password_salt, username) VALUES ('d4dbc31d-8a96-45d5-96d1-97f5e4d5c495', 'Administrador', 'mGzR+aVLuPggFyrOQ3TaPuSI4eSWxpBm8zwcLlR6wTM=', '4xtwkSCcnoffMsn4ngXHkA==', 'admin');
+INSERT INTO users (id, name, password, password_salt, username) VALUES ('d4dbc31d-8a96-45d5-96d1-97f5e4d5c495', 'Administrador', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=', '++No6iyBL3kP8q7hyECs3g==', 'admin');
 commit;
 
 

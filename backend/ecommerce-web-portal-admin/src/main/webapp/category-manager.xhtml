@@ -21,6 +21,7 @@
 			<br />
 
 			<p:commandButton value="Nova Categoria" icon="pi pi-plus" update="categoriaForm" onstart="PF('dlg').show();" />
+			<p:commandButton value="Atualizar" action="#{categoriaController.reloadAll}" update="categoriaTable" />
 
 			<p:dataTable value="#{categoriaController.categorias}" var="categoria"
 				lazy="false" paginator="true" rows="10">

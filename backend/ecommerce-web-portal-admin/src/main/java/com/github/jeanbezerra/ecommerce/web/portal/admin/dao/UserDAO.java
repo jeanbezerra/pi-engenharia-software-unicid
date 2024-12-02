@@ -32,7 +32,8 @@ public class UserDAO implements GenericDAO<UserEntity>, Serializable {
 			try {
 
 				HibernateEntityManagerHelper.beginTransaction();
-				entityManager.persist(entity);
+				entityManager.merge(entity);
+				//entityManager.persist(entity);
 				HibernateEntityManagerHelper.commit();
 				LOGGER.debug("new user successfully registered");
 

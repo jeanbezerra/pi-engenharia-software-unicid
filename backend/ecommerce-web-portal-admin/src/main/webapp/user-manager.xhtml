@@ -14,7 +14,7 @@
 		<ui:include src="/resources/components/navigation.xhtml" />
 
 
-		<div class="container-fluid">
+		<div class="container">
 
 
 			<br />
@@ -27,21 +27,21 @@
 
 			<!-- Tabela de usuários -->
 			<p:dataTable value="#{userManagerController.users}" var="user" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
-				<p:column headerText="ID" width="150px">
+				<p:column headerText="ID">
 					<h:outputText value="#{user.id}" />
 				</p:column>
-				<p:column headerText="Username" width="150px" sortBy="#{user.username}" filterBy="#{user.username}" filterMatchMode="contains" filterPlaceholder="Filtre por username">
+				<p:column headerText="Username" sortBy="#{user.username}" filterBy="#{user.username}" filterMatchMode="contains" filterPlaceholder="Filtre por username">
 					<h:outputText value="#{user.username}" />
 				</p:column>
-				<p:column headerText="Nome" width="150px">
+				<p:column headerText="Nome" >
 					<h:outputText value="#{user.name}" />
 				</p:column>
-				<p:column headerText="Passowrd (Hashed)" width="450px">
-					<h:outputText value="#{user.password}" />
-				</p:column>
-				<p:column headerText="Passowrd (Salt)" width="350px">
-					<h:outputText value="#{user.passwordSalt}" />
-				</p:column>
+<!-- 				<p:column headerText="Passowrd (Hashed)" width="450px"> -->
+<!-- 					<h:outputText value="#{user.password}" /> -->
+<!-- 				</p:column> -->
+<!-- 				<p:column headerText="Passowrd (Salt)" width="350px"> -->
+<!-- 					<h:outputText value="#{user.passwordSalt}" /> -->
+<!-- 				</p:column> -->
 				<p:column headerText="Ações">
 					<p:commandButton value="Editar" action="#{userManagerController.prepareEdit(user)}" update=":userForm" onstart="PF('dlg').show();" />
 					<p:commandButton value="Excluir" action="#{userManagerController.deleteUser(user.id)}" update=":userTable" />

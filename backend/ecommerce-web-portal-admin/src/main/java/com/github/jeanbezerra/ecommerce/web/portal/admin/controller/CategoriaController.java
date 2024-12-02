@@ -56,6 +56,15 @@ public class CategoriaController implements Serializable {
 		this.selectedCategoria = categoriaDAO.findById(categoria.getCategoriaId());
 		this.editMode = true;
 	}
+	
+	public void reloadAll() {
+		try {
+			
+			this.categorias = this.categoriaDAO.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	private void loadCategorias() {
 		this.categorias = categoriaDAO.findAll();

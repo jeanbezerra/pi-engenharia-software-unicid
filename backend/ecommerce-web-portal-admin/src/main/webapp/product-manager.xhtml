@@ -24,6 +24,7 @@
 			<br />
 
 			<p:commandButton value="Novo Produto" icon="pi pi-plus" update="produtoForm" onstart="PF('dlg').show();" />
+			<p:commandButton value="Atualizar" action="#{produtoController.reloadAll}" update="produtoTable" />
 
 			<p:dataTable value="#{produtoController.produtos}" var="produto" lazy="false" paginator="true" rows="20">
 				<p:column headerText="ID">

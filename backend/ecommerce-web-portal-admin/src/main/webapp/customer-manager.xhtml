@@ -14,13 +14,15 @@
 		<ui:include src="/resources/components/navigation.xhtml" />
 
 
-		<div class="container">
+		<div class="container-fluid">
 		
 			<br />
 			<h1 class="display-4">Gerenciamento de Clientes</h1>
 			<br />
 			
 			<p:commandButton value="Novo Cliente"  icon="pi pi-plus" update="clienteForm" onstart="PF('dlg').show();" />
+			
+			<p:commandButton value="Atualizar" action="#{clienteController.reloadAll}" update="clienteTable"></p:commandButton>
 
 			<p:dataTable value="#{clienteController.clientes}" var="cliente" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
 				<p:column headerText="ID">
@@ -29,7 +31,7 @@
 				<p:column headerText="Nome">
 					<h:outputText value="#{cliente.nome}" />
 				</p:column>
-				<p:column headerText="Email">
+				<p:column headerText="Email" sortBy="#{cliente.email}" filterBy="#{cliente.email}" filterMatchMode="contains" filterPlaceholder="Filtre por email">
 					<h:outputText value="#{cliente.email}" />
 				</p:column>
 				<p:column headerText="Telefone">
@@ -68,7 +70,7 @@
 
 				<p:outputLabel for="senha" value="Senha" />
 				<p:password id="senha"
-					value="#{clienteController.selectedCliente.senha}" required="true" toggleMask="true" redisplay="true"/>
+					value="#{clienteController.selectedCliente.password}" required="true" toggleMask="true" redisplay="true"/>
 
 				<p:outputLabel for="endereco" value="Endereço" />
 				<p:inputText id="endereco"

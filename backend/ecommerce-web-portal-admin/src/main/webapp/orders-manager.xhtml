@@ -25,6 +25,7 @@
 
 
 			<p:commandButton value="Novo Pedido" action="#{pedidoController.gerarNovoPedido}" />
+			<p:commandButton value="Atualizar" action="#{pedidoController.reloadAll}" />
 
 			<p:dataTable id="tabelaPedidos" value="#{pedidoController.pedidos}"
 				var="pedido" rowKey="#{pedido.pedidoId}" paginator="true" rows="10"

@@ -139,7 +139,7 @@ public class PedidoController implements Serializable {
 		}
 	}
 
-	private void reloadAll() {
+	public void reloadAll() {
 		clientesOptions = clienteDAO.findAllAsSelectItems();
 		produtosOptions = produtoDAO.findAllAsSelectItems();
 		pedidos = pedidoDAO.findAllPedidos();

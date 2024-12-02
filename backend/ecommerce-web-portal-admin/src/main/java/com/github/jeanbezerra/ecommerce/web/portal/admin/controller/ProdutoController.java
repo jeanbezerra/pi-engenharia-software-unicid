@@ -78,6 +78,14 @@ public class ProdutoController implements Serializable {
 		this.selectedCategoryId = this.selectedProduto.getCategoria().getCategoriaId();
 		this.editMode = true;
 	}
+	
+	public void reloadAll() {
+		try {
+			this.produtos = this.produtoDAO.findAll();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	private void loadProdutos() {
 		this.produtos = produtoDAO.findAll();

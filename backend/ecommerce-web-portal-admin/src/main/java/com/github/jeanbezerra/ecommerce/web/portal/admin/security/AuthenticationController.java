@@ -42,10 +42,10 @@ public class AuthenticationController implements Serializable {
 	private static final String SUCCESSFULLY_REGISTERED_PAGE = "successfullyRegistered.jsf?faces-redirect=true";
 
 	@Inject
-	private UserEntity user = new UserEntity();
+	private UserEntity user;
 
 	@Inject
-	private UserDAO userDAO = new UserDAO();
+	private UserDAO userDAO;
 
 	private String fieldUsername;
 	private String fieldPassword;
