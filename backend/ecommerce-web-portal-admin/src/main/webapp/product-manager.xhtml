@@ -17,14 +17,22 @@
 		<ui:include src="/resources/components/navigation.xhtml" />
 
 
-		<div class="container">
+		<div class="container-fluid">
 
 			<br />
-			<h1 class="display-4">Gerenciamento de Produtos</h1>
+			<h1 class="display-4">Produtos</h1>
 			<br />
 
-			<p:commandButton value="Novo Produto" icon="pi pi-plus" update="produtoForm" onstart="PF('dlg').show();" />
-			<p:commandButton value="Atualizar" action="#{produtoController.reloadAll}" update="produtoTable" icon="pi pi-refresh"/>
+			<h:panelGrid columns="3">
+				<h:column>
+					<p:commandButton value="Novo Produto" icon="pi pi-plus" update="produtoForm" onstart="PF('dlg').show();" />
+				</h:column>
+				<h:column>
+				</h:column>
+				<h:column>
+					<p:commandButton value="Atualizar" action="#{produtoController.reloadAll}" update="produtoTable" icon="pi pi-refresh"/>
+				</h:column>
+			</h:panelGrid>
 
 			<p:dataTable value="#{produtoController.produtos}" var="produto" lazy="false" paginator="true" rows="20">
 				<p:column headerText="ID">

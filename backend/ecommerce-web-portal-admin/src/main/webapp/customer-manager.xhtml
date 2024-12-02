@@ -17,11 +17,19 @@
 		<div class="container-fluid">
 		
 			<br />
-			<h1 class="display-4">Gerenciamento de Clientes</h1>
+			<h1 class="display-4">Clientes</h1>
 			<br />
 			
-			<p:commandButton value="Novo Cliente"  icon="pi pi-plus" update="clienteForm" onstart="PF('dlg').show();" />			
-			<p:commandButton value="Atualizar" action="#{clienteController.reloadAll}" update="clienteTable" icon="pi pi-refresh"/>
+			<h:panelGrid columns="3">
+				<h:column>
+					<p:commandButton value="Novo Cliente"  icon="pi pi-plus" update="clienteForm" onstart="PF('dlg').show();" />
+				</h:column>
+				<h:column>
+				</h:column>
+				<h:column>			
+					<p:commandButton value="Atualizar" action="#{clienteController.reloadAll}" update="clienteTable" icon="pi pi-refresh"/>
+				</h:column>
+			</h:panelGrid>
 
 			<p:dataTable value="#{clienteController.clientes}" var="cliente" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
 				<p:column headerText="ID">
@@ -42,10 +50,12 @@
 				<p:column headerText="Ações">
 					<p:commandButton value="Editar"
 						action="#{clienteController.prepareEdit(cliente)}"
-						update="clienteForm" onstart="PF('dlg').show();" />
+						update="clienteForm" onstart="PF('dlg').show();" 
+						icon="pi pi-pencil"/>
 					<p:commandButton value="Excluir"
 						action="#{clienteController.deleteCliente(cliente.clienteId)}"
-						update="clienteTable" />
+						update="clienteTable" 
+						icon="pi pi-trash"/>
 				</p:column>
 			</p:dataTable>
 			

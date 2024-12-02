@@ -17,11 +17,19 @@
 		<div class="container">
 
 			<br />
-			<h1 class="display-4">Gerenciamento de Categorias</h1>
+			<h1 class="display-4">Categorias</h1>
 			<br />
 
-			<p:commandButton value="Nova Categoria" icon="pi pi-plus" update="categoriaForm" onstart="PF('dlg').show();" />
-			<p:commandButton value="Atualizar" action="#{categoriaController.reloadAll}" update="categoriaTable" icon="pi pi-refresh"/>
+			<h:panelGrid columns="3">
+				<h:column>
+					<p:commandButton value="Nova Categoria" icon="pi pi-plus" update="categoriaForm" onstart="PF('dlg').show();" />
+				</h:column>
+				<h:column>
+				</h:column>
+				<h:column>
+					<p:commandButton value="Atualizar" action="#{categoriaController.reloadAll}" update="categoriaTable" icon="pi pi-refresh"/>
+				</h:column>
+			</h:panelGrid>
 
 			<p:dataTable value="#{categoriaController.categorias}" var="categoria"
 				lazy="false" paginator="true" rows="10">
@@ -34,10 +42,12 @@
 				<p:column headerText="Ações">
 					<p:commandButton value="Editar"
 						action="#{categoriaController.prepareEdit(categoria)}"
-						update="categoriaForm" onstart="PF('dlg').show();" />
+						update="categoriaForm" onstart="PF('dlg').show();" 
+						icon="pi pi-pencil"/>
 					<p:commandButton value="Excluir"
 						action="#{categoriaController.deleteCategoria(categoria.categoriaId)}"
-						update="categoriaTable" />
+						update="categoriaTable" 
+						icon="pi pi-trash"/>
 				</p:column>
 			</p:dataTable>
 

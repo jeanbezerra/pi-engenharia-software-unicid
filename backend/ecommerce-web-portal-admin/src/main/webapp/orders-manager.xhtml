@@ -16,16 +16,23 @@
 		<p:growl id="growl" showDetail="true" sticky="false" />
 
 
-		<div class="container">
+		<div class="container-fluid">
 
 
 			<br />
-			<h1 class="display-4">Gerenciamento de Pedidos</h1>
+			<h1 class="display-4">Pedidos</h1>
 			<br />
 
-
-			<p:commandButton value="Novo Pedido" action="#{pedidoController.gerarNovoPedido}" icon="pi pi-plus"/>
-			<p:commandButton value="Atualizar" action="#{pedidoController.reloadAll}" icon="pi pi-refresh"/>
+			<h:panelGrid columns="3">
+				<h:column>
+					<p:commandButton value="Novo Pedido" action="#{pedidoController.gerarNovoPedido}" icon="pi pi-plus"/>
+				</h:column>
+				<h:column>
+				</h:column>
+				<h:column>
+					<p:commandButton value="Atualizar" action="#{pedidoController.reloadAll}" icon="pi pi-refresh"/>
+				</h:column>
+			</h:panelGrid>
 
 			<p:dataTable id="tabelaPedidos" value="#{pedidoController.pedidos}"
 				var="pedido" rowKey="#{pedido.pedidoId}" paginator="true" rows="10"
@@ -62,10 +69,10 @@
 
 				<!-- Botão para Visualizar Detalhes -->
 				<p:column headerText="Ações">
-					<p:commandButton value="Ver Itens" oncomplete="PF('dlgItens').show()" update=":formItens" action="#{pedidoController.setPedidoSelecionado(pedido)}" />
+					<p:commandButton value="Ver Itens" oncomplete="PF('dlgItens').show()" update=":formItens" action="#{pedidoController.setPedidoSelecionado(pedido)}" icon="pi pi-list-check"/>
 					
 					<!-- Botão para finalizar pedido -->
-    			<p:commandButton value="Finalizar" styleClass="p-button-success" action="#{pedidoController.finalizarPedido(pedido)}" update="@form" disabled="#{pedido.status eq 'Finalizado'}" />
+    			<p:commandButton value="Finalizar" styleClass="p-button-success" action="#{pedidoController.finalizarPedido(pedido)}" update="@form" disabled="#{pedido.status eq 'Finalizado'}" icon="pi pi-check"/>
 				</p:column>
 			</p:dataTable>
 

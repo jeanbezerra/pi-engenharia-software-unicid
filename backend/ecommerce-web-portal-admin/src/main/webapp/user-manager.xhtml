@@ -18,12 +18,19 @@
 
 
 			<br />
-			<h1 class="display-4">Gerenciamento de Usuários</h1>
+			<h1 class="display-4">Usuários</h1>
 			<br />
 
-			<!-- Botão para adicionar novo usuário -->
-			<p:commandButton value="Novo Usuário" icon="pi pi-plus" onstart="PF('dlg').show();" update=":userForm" />
-			<p:commandButton value="Atualizar" action="#{userManagerController.refreshData}" update="userTable" icon="pi pi-refresh"/>
+			<h:panelGrid columns="3">
+				<h:column>
+					<p:commandButton value="Novo Usuário" icon="pi pi-plus" onstart="PF('dlg').show();" update=":userForm" />
+				</h:column>
+				<h:column>
+				</h:column>
+				<h:column>
+					<p:commandButton value="Atualizar" action="#{userManagerController.refreshData}" update="userTable" icon="pi pi-refresh"/>
+				</h:column>
+			</h:panelGrid>
 
 			<!-- Tabela de usuários -->
 			<p:dataTable value="#{userManagerController.users}" var="user" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
@@ -43,8 +50,8 @@
 <!-- 					<h:outputText value="#{user.passwordSalt}" /> -->
 <!-- 				</p:column> -->
 				<p:column headerText="Ações">
-					<p:commandButton value="Editar" action="#{userManagerController.prepareEdit(user)}" update=":userForm" onstart="PF('dlg').show();" />
-					<p:commandButton value="Excluir" action="#{userManagerController.deleteUser(user.id)}" update=":userTable" />
+					<p:commandButton value="Editar" icon="pi pi-pencil" action="#{userManagerController.prepareEdit(user)}" update=":userForm" onstart="PF('dlg').show();" />
+					<p:commandButton value="Excluir" icon="pi pi-trash" action="#{userManagerController.deleteUser(user.id)}" update=":userTable" />
 				</p:column>
 			</p:dataTable>
 
