@@ -35,19 +35,19 @@
 			</h:panelGrid>
 
 			<p:dataTable value="#{produtoController.produtos}" var="produto" lazy="false" paginator="true" rows="20">
-				<p:column headerText="ID">
+				<p:column headerText="ID" sortBy="#{produto.produtoId}">
 					<h:outputText value="#{produto.produtoId}" />
 				</p:column>
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{produto.nome}" filterBy="#{produto.nome}" filterMatchMode="contains" filterPlaceholder="Filtre por nome">
 					<h:outputText value="#{produto.nome}" />
 				</p:column>
 				<p:column headerText="Categoria">
 					<h:outputText value="#{produto.categoria.nome}" />
 				</p:column>
-				<p:column headerText="Preço">
+				<p:column headerText="Preço" sortBy="#{produto.preco}" filterBy="#{produto.preco}" filterMatchMode="contains" filterPlaceholder="Filtre por preço">
 					<h:outputText value="#{produto.preco}" />
 				</p:column>
-				<p:column headerText="Estoque">
+				<p:column headerText="Estoque" sortBy="#{produto.estoque}">
 					<h:outputText value="#{produto.estoque}" />
 				</p:column>
 				<p:column headerText="Ações">

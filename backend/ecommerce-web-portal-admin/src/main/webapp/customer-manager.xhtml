@@ -32,7 +32,7 @@
 			</h:panelGrid>
 
 			<p:dataTable value="#{clienteController.clientes}" var="cliente" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
-				<p:column headerText="ID">
+				<p:column headerText="ID" sortBy="#{cliente.clienteId}">
 					<h:outputText value="#{cliente.clienteId}" />
 				</p:column>
 				<p:column headerText="Nome">
