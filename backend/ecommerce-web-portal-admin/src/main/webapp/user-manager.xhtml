@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+<h:body>
+
+	<h:form id="userTable">
+		<ui:include src="/resources/components/navigation.xhtml" />
+
+
+		<div class="container-fluid">
+
+
+			<br />
+			<h1 class="display-4">Gerenciamento de Usuários</h1>
+			<br />
+
+			<!-- Botão para adicionar novo usuário -->
+			<p:commandButton value="Novo Usuário" icon="pi pi-plus" onstart="PF('dlg').show();" update=":userForm" />
+			<p:commandButton value="Atualizar" action="#{userManagerController.refreshData}" update="userTable" />
+
+			<!-- Tabela de usuários -->
+			<p:dataTable value="#{userManagerController.users}" var="user" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
+				<p:column headerText="ID" width="150px">
+					<h:outputText value="#{user.id}" />
+				</p:column>
+				<p:column headerText="Username" width="150px" sortBy="#{user.username}" filterBy="#{user.username}" filterMatchMode="contains" filterPlaceholder="Filtre por username">
+					<h:outputText value="#{user.username}" />
+				</p:column>
+				<p:column headerText="Nome" width="150px">
+					<h:outputText value="#{user.name}" />
+				</p:column>
+				<p:column headerText="Passowrd (Hashed)" width="450px">
+					<h:outputText value="#{user.password}" />
+				</p:column>
+				<p:column headerText="Passowrd (Salt)" width="350px">
+					<h:outputText value="#{user.passwordSalt}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Editar" action="#{userManagerController.prepareEdit(user)}" update=":userForm" onstart="PF('dlg').show();" />
+					<p:commandButton value="Excluir" action="#{userManagerController.deleteUser(user.id)}" update=":userTable" />
+				</p:column>
+			</p:dataTable>
+
+			
+
+
+
+
+		</div>
+
+	</h:form>
+
+	<!-- Modal para criar/editar usuário -->
+	<p:dialog header="Usuário" widgetVar="dlg" modal="true" resizable="false" styleClass="popup" width="600" height="400">
+		<h:form id="userForm">
+			<p:panelGrid columns="2" styleClass="form">
+				<p:outputLabel for="username" value="Username" />
+				<p:inputText id="username"
+					value="#{userManagerController.selectedUser.username}"
+					required="true" />
+
+				<p:outputLabel for="name" value="Nome" />
+				<p:inputText id="name"
+					value="#{userManagerController.selectedUser.name}" required="true" />
+
+				<p:outputLabel for="password" value="Senha" />
+				<p:password id="password" value="#{userManagerController.selectedUser.password}" required="true" toggleMask="true" redisplay="true"/>
+			</p:panelGrid>
+			<p:commandButton value="Salvar"
+				icon="pi pi-save"
+				action="#{userManagerController.saveUser()}" update=":userTable"
+				oncomplete="PF('dlg').hide();" />
+		</h:form>
+	</p:dialog>
+
+
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+
+</h:body>
+</html>

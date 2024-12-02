@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+<h:body>
+
+	<h:form id="clienteTable">
+		<ui:include src="/resources/components/navigation.xhtml" />
+
+
+		<div class="container">
+		
+			<br />
+			<h1 class="display-4">Gerenciamento de Clientes</h1>
+			<br />
+			
+			<p:commandButton value="Novo Cliente"  icon="pi pi-plus" update="clienteForm" onstart="PF('dlg').show();" />
+
+			<p:dataTable value="#{clienteController.clientes}" var="cliente" responsiveLayout="scroll" styleClass="table" lazy="false" paginator="true" rows="10">
+				<p:column headerText="ID">
+					<h:outputText value="#{cliente.clienteId}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{cliente.email}" />
+				</p:column>
+				<p:column headerText="Telefone">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+				<p:column headerText="Endereço">
+					<h:outputText value="#{cliente.endereco}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Editar"
+						action="#{clienteController.prepareEdit(cliente)}"
+						update="clienteForm" onstart="PF('dlg').show();" />
+					<p:commandButton value="Excluir"
+						action="#{clienteController.deleteCliente(cliente.clienteId)}"
+						update="clienteTable" />
+				</p:column>
+			</p:dataTable>
+			
+
+
+		</div>
+
+
+	</h:form>
+
+	<p:dialog header="Cliente" widgetVar="dlg" modal="true" resizable="false" width="600" height="400">
+		<h:form id="clienteForm">
+			<p:panelGrid columns="2">
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome"
+					value="#{clienteController.selectedCliente.nome}" required="true" />
+
+				<p:outputLabel for="email" value="Email" />
+				<p:inputText id="email"
+					value="#{clienteController.selectedCliente.email}" required="true" />
+
+				<p:outputLabel for="senha" value="Senha" />
+				<p:password id="senha"
+					value="#{clienteController.selectedCliente.senha}" required="true" toggleMask="true" redisplay="true"/>
+
+				<p:outputLabel for="endereco" value="Endereço" />
+				<p:inputText id="endereco"
+					value="#{clienteController.selectedCliente.endereco}" />
+
+				<p:outputLabel for="telefone" value="Telefone" />
+				<p:inputText id="telefone"
+					value="#{clienteController.selectedCliente.telefone}" />
+			</p:panelGrid>
+			<p:commandButton value="Salvar"
+				icon="pi pi-save"
+				action="#{clienteController.saveCliente}" update="clienteTable"
+				oncomplete="PF('dlg').hide();" />
+		</h:form>
+	</p:dialog>
+
+
+
+
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+
+</h:body>
+</html>

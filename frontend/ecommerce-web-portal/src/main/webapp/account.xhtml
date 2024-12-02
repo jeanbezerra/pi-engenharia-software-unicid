@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Minha Conta</title>
+</h:head>
+
+<h:body>
+    <h1>Minha Conta</h1>
+    <h:panelGrid columns="2">
+        <h:outputLabel value="Nome:" />
+        <h:outputText value="#{userController.user.name}" />
+
+        <h:outputLabel value="Email:" />
+        <h:outputText value="#{userController.user.email}" />
+    </h:panelGrid>
+
+    <h2>Meus Pedidos</h2>
+    <p:dataTable value="#{orderController.orders}" var="order">
+        <p:column headerText="ID">
+            <h:outputText value="#{order.id}" />
+        </p:column>
+        <p:column headerText="Data">
+            <h:outputText value="#{order.date}" />
+        </p:column>
+        <p:column headerText="Status">
+            <h:outputText value="#{order.status}" />
+        </p:column>
+    </p:dataTable>
+</h:body>
+</html>

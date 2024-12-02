@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+<h:body>
+
+	<h:form id="formPedidos">
+		<ui:include src="/resources/components/navigation.xhtml" />
+		
+		<p:growl id="growl" showDetail="true" sticky="false" />
+
+
+		<div class="container">
+
+
+			<br />
+			<h1 class="display-4">Gerenciamento de Pedidos</h1>
+			<br />
+
+
+			<p:commandButton value="Novo Pedido" action="#{pedidoController.gerarNovoPedido}" />
+
+			<p:dataTable id="tabelaPedidos" value="#{pedidoController.pedidos}"
+				var="pedido" rowKey="#{pedido.pedidoId}" paginator="true" rows="10"
+				responsiveLayout="scroll">
+
+				<!-- Coluna ID do Pedido -->
+				<p:column headerText="ID">
+					<h:outputText value="#{pedido.pedidoId}" />
+				</p:column>
+
+				<!-- Coluna Cliente -->
+				<p:column headerText="Cliente">
+					<h:outputText value="#{pedido.cliente.nome}" />
+				</p:column>
+
+				<!-- Coluna Data do Pedido -->
+				<p:column headerText="Data">
+					<h:outputText value="#{pedido.dataPedido}">						
+					</h:outputText>
+				</p:column>
+
+				<!-- Coluna Status -->
+				<p:column headerText="Status">
+					<h:outputText value="#{pedido.status}" />
+				</p:column>
+
+				<!-- Coluna Valor Total -->
+				<p:column headerText="Valor Total">
+					<h:outputText
+						value="#{pedidoController.calcularValorTotal(pedido)}">
+						<f:convertNumber pattern="###,###.00" />
+					</h:outputText>
+				</p:column>
+
+				<!-- Botão para Visualizar Detalhes -->
+				<p:column headerText="Ações">
+					<p:commandButton value="Ver Itens" oncomplete="PF('dlgItens').show()" update=":formItens" action="#{pedidoController.setPedidoSelecionado(pedido)}" />
+					
+					<!-- Botão para finalizar pedido -->
+    			<p:commandButton value="Finalizar" styleClass="p-button-success" action="#{pedidoController.finalizarPedido(pedido)}" update="@form" disabled="#{pedido.status eq 'Finalizado'}" />
+				</p:column>
+			</p:dataTable>
+
+		</div>
+
+	</h:form>
+
+	<!-- Dialog para Visualizar Itens -->
+	<p:dialog header="Itens do Pedido" widgetVar="dlgItens" modal="true"
+		resizable="false">
+		<h:form id="formItens">
+			<p:dataTable id="tabelaItens"
+				value="#{pedidoController.pedidoSelecionado.items}" var="item">
+				<p:column headerText="Produto">
+					<h:outputText value="#{item.produto.nome}" />
+				</p:column>
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{item.quantidade}" />
+				</p:column>
+				<p:column headerText="Preço Unitário">
+					<h:outputText value="#{item.precoUnitario}">
+						<f:convertNumber pattern="###,###.00" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Total">
+					<h:outputText value="#{item.quantidade * item.precoUnitario}">
+						<f:convertNumber pattern="###,###.00" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:dialog>
+
+
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+
+</h:body>
+</html>

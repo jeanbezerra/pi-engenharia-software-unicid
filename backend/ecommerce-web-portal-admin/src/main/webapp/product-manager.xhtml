@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{produtoController.loadPage}" />
+</f:metadata>
+<h:body>
+
+	<h:form id="produtoTable">
+		<ui:include src="/resources/components/navigation.xhtml" />
+
+
+		<div class="container">
+
+			<br />
+			<h1 class="display-4">Gerenciamento de Produtos</h1>
+			<br />
+
+			<p:commandButton value="Novo Produto" icon="pi pi-plus" update="produtoForm" onstart="PF('dlg').show();" />
+
+			<p:dataTable value="#{produtoController.produtos}" var="produto" lazy="false" paginator="true" rows="20">
+				<p:column headerText="ID">
+					<h:outputText value="#{produto.produtoId}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{produto.nome}" />
+				</p:column>
+				<p:column headerText="Categoria">
+					<h:outputText value="#{produto.categoria.nome}" />
+				</p:column>
+				<p:column headerText="Preço">
+					<h:outputText value="#{produto.preco}" />
+				</p:column>
+				<p:column headerText="Estoque">
+					<h:outputText value="#{produto.estoque}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Editar" icon="pi pi-pencil" action="#{produtoController.prepareEdit(produto)}" update="produtoForm" onstart="PF('dlg').show();" />
+					<p:commandButton value="Excluir" icon="pi pi-trash" action="#{produtoController.deleteProduto(produto.produtoId)}" update="produtoTable" />
+				</p:column>
+			</p:dataTable>
+
+
+		</div>
+
+
+	</h:form>
+
+	<p:dialog header="Produto" widgetVar="dlg" modal="true" resizable="false" width="500">
+        <h:form id="produtoForm">
+            <p:panelGrid columns="2">
+                <p:outputLabel for="nome" value="Nome" />
+                <p:inputText id="nome" value="#{produtoController.selectedProduto.nome}" required="true" />
+
+                <p:outputLabel for="descricao" value="Descrição" />
+                <p:inputText id="descricao" value="#{produtoController.selectedProduto.descricao}" />
+
+                <p:outputLabel for="preco" value="Preço" />
+                <p:inputText id="preco" value="#{produtoController.selectedProduto.preco}" required="true" />
+
+                <p:outputLabel for="estoque" value="Estoque" />
+                <p:inputText id="estoque" value="#{produtoController.selectedProduto.estoque}" required="true" />
+
+                <p:outputLabel for="imagem" value="URL da Imagem" />
+                <p:inputText id="imagem" value="#{produtoController.selectedProduto.imagemUrl}" />
+
+                <p:outputLabel for="categoria" value="Categoria" />
+                <p:selectOneMenu id="categoria" value="#{produtoController.selectedCategoryId}">
+				    <f:selectItem itemLabel="Selecione uma Categoria" itemValue="0" />
+				    <f:selectItems value="#{produtoController.categoriaOptions}" />
+				</p:selectOneMenu>
+<!--                 <p:selectOneMenu id="categoria" value="#{produtoController.selectedCategory}" required="true"> -->
+<!--                     <f:selectItems value="#{produtoController.categoriaOptions}" /> -->
+<!--                 </p:selectOneMenu> -->
+            </p:panelGrid>
+            <p:commandButton value="Salvar" action="#{produtoController.saveProduto}" update="produtoTable" oncomplete="PF('dlg').hide();" />
+        </h:form>
+    </p:dialog>
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+
+</h:body>
+</html>

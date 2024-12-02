@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+<h:body>
+
+	<h:form id="categoriaTable">
+		<ui:include src="/resources/components/navigation.xhtml" />
+
+
+		<div class="container">
+
+			<br />
+			<h1 class="display-4">Gerenciamento de Categorias</h1>
+			<br />
+
+			<p:commandButton value="Nova Categoria" icon="pi pi-plus" update="categoriaForm" onstart="PF('dlg').show();" />
+
+			<p:dataTable value="#{categoriaController.categorias}" var="categoria"
+				lazy="false" paginator="true" rows="10">
+				<p:column headerText="ID">
+					<h:outputText value="#{categoria.categoriaId}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{categoria.nome}" />
+				</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Editar"
+						action="#{categoriaController.prepareEdit(categoria)}"
+						update="categoriaForm" onstart="PF('dlg').show();" />
+					<p:commandButton value="Excluir"
+						action="#{categoriaController.deleteCategoria(categoria.categoriaId)}"
+						update="categoriaTable" />
+				</p:column>
+			</p:dataTable>
+
+		</div>
+
+
+	</h:form>
+
+	<p:dialog header="Categoria" widgetVar="dlg" modal="true" resizable="false" width="600" height="300">
+		<h:form id="categoriaForm">
+			<p:panelGrid columns="2">
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" value="#{categoriaController.selectedCategoria.nome}" required="true" />
+			</p:panelGrid>
+			<p:commandButton value="Salvar" action="#{categoriaController.saveCategoria}" update="categoriaTable" oncomplete="PF('dlg').hide();" />
+		</h:form>
+	</p:dialog>
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+
+</h:body>
+</html>

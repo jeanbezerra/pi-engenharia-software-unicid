@@ -1,0 +1,62 @@
+/* Adicione este conteúdo ao seu arquivo swagger-style.css */
+.swagger-container {
+    margin: 30px;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+}
+
+.swagger-header {
+    display: flex;
+    align-items: center;
+    background-color: #e3f2fd;
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid #e1e1e8;
+}
+
+.swagger-header h1 {
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.swagger-method {
+    background-color: #4caf50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.swagger-panelGrid {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.swagger-panelGrid .ui-panelgrid-cell {
+    padding: 10px;
+    vertical-align: top;
+}
+
+.swagger-panelGrid .ui-outputlabel {
+    font-weight: bold;
+    color: #424242;
+}
+
+.swagger-response, .swagger-parameter {
+    margin-bottom: 5px;
+}
+
+.swagger-code-block {
+    background-color: #2d2d2d;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-family: Consolas, "Courier New", Courier, monospace;
+}

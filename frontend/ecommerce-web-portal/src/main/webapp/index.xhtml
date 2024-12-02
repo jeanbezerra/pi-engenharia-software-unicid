@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+
+<h:body>
+
+	<h:form>
+	<div class="container">
+	
+		<ui:include src="/resources/components/navigation.xhtml" />
+
+		<br />
+		<h1>Produtos</h1>
+		<br />
+
+		<div class="row">
+			<ui:repeat value="#{produtoController.produtosList}" var="produto">
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img class="card-img-top img-card" src="#{produto.imagemUrl}"
+							alt="#{produto.nome}" />
+						<div class="card-body">
+							<h5 class="card-title">#{produto.nome}</h5>
+							<p class="card-text">#{produto.descricao}</p>
+							<p class="card-text">
+								<strong>Preço:</strong>
+								<h:outputText value="#{produto.preco}">
+									<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+								</h:outputText>
+							</p>
+							<p class="card-text">
+								<strong>Estoque:</strong> #{produto.estoque}
+							</p>
+							<div class="d-flex justify-content-between mt-2">
+							    <h:commandButton value="Adicionar ao carrinho" action="#{cartController.addToCart(produto)}" styleClass="btn btn-primary btn-sm" />
+							    <h:link value="Espiar" outcome="product-detail" styleClass="btn btn-outline-secondary btn-sm">
+							        <f:param name="produtoId" value="#{produto.id}" />
+							    </h:link>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>
+
+	</div>
+	</h:form>
+	
+	
+	<ui:include src="/resources/components/footer.xhtml" />
+
+</h:body>
+</html>

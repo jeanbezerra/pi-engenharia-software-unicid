@@ -1,0 +1,90 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.limited-text {
+	display: inline-block;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background: transparent;
+}
+
+body .ui-tree.ui-tree-horizontal {
+	color: #333333;
+	font-weight: bold;
+	border: none;
+	overflow: visible;
+	margin: 200;
+	background-color: transparent;
+}
+
+body .ui-treenode-content {
+	background-color: transparent;
+}
+
+
+
+body .ui-tree.ui-tree-horizontal .ui-treenode.node-project-color .ui-treenode-content
+	{
+	background: #004080;
+	color: #ffffff;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode.node-project-color .ui-treenode-content.ui-state-highlight
+	{
+	background-color: #8080ff;
+	color: #ffffff;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode.node-feature-color .ui-treenode-content
+	{
+	background: #0080c0;
+	color: #ffffff;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode.node-feature-color .ui-treenode-content.ui-state-highlight
+	{
+	background-color: #8080ff;
+	color: #ffffff;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode.node-scenary-color .ui-treenode-content
+	{
+	background: #65b1b1;
+	color: #ffffff;
+}
+
+body .ui-tree.ui-tree-horizontal .ui-treenode.node-scenary-color .ui-treenode-content.ui-state-highlight
+	{
+	background-color: #8080ff;
+	color: #ffffff;
+}
+
+
+.legend-scale {
+    position: fixed;
+    bottom: 2px;
+    right: 5px;
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.legend-labels {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.legend-labels li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.legend-labels li span {
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+    margin-right: 5px;
+}

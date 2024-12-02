@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/security/head.xhtml" />
+	
+</h:head>
+<h:body>
+
+	<h:form id="form_register">
+
+		<div class="login-page">
+			<div class="form">
+				
+				<p:spacer width="100%" height="20px" />
+				
+				<h2>Cadastro</h2>
+				<hr />
+				<div class="register-form">
+				
+					<p:outputLabel value="Nome" for="name"/>
+					<p:inputText value="#{authenticationController.user.name}" required="true" title="name" id="name"/>
+					
+					<p:outputLabel value="Email" for="username"/>					
+					<p:inputText value="#{authenticationController.user.username}" required="true" title="username" id="username" type="email"/>
+					
+					<p:outputLabel value="Senha" for="password"/>					
+					<p:password value="#{authenticationController.user.password}" required="true" title="password" id="password"/>
+					
+					<hr />
+											
+					<p:commandButton value="Cadastrar" action="#{authenticationController.registerNewUser()}" immediate="false" ajax="false"/>
+					<p class="message">
+						Já possui registro? <a href="index.jsf?faces-redirect=true">Login</a>						
+					</p>
+				</div>
+			</div>
+		</div>
+	</h:form>
+	
+	<div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+    </div >
+
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+</h:body>
+</html>

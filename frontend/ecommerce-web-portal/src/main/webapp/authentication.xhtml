@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/security/head.xhtml" />
+</h:head>
+<h:body>
+
+
+	<h:form>
+	
+		<div class="container">
+	
+		<ui:include src="/resources/components/security/navigation.xhtml" />
+
+		<div class="login-page">
+			<div class="form">
+
+				<p:spacer width="100%" height="20px" />
+
+				<h2>Login</h2>
+				<hr />
+				<div class="login-form">
+
+					<p:messages id="messages" showDetail="true" closable="true">
+						<p:autoUpdate />
+					</p:messages>
+
+					<p:outputLabel value="Email" for="username" />
+					<p:inputText value="#{authenticationController.fieldUsername}" title="username" id="username" />
+
+					<p:outputLabel value="Senha" for="password" />
+					<p:password value="#{authenticationController.fieldPassword}" title="password" id="password" />
+
+					<p:spacer width="100%" height="20px" />
+					<p:commandButton value="Entrar" action="#{authenticationController.loginUser()}" />
+						<div class="message">
+						<p>
+							Não é registrado? <a href="register.jsf?faces-redirect=true">Cadastre-se</a>
+							ou <a href="register.jsf?faces-redirect=true">Redefina seu
+								acesso</a>
+						</p>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+		
+		</div>
+	</h:form>
+	<ui:include src="/resources/components/footer.xhtml" />
+	
+	<ui:include src="/resources/components/scripts.xhtml" />
+</h:body>
+</html>

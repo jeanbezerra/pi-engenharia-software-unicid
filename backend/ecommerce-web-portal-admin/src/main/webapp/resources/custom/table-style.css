@@ -1,0 +1,26 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.expanded-table thead {
+	display: none;
+}
+
+.expanded-table tr {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    height: 20px;
+}
+
+#form\:datatable-list\:scenary-id\:filter {
+    display: none !important;
+}
+
+
+body .ui-chkbox-box.ui-state-active {
+    background-color: #ff0000;
+    border-color: #ff0000; 
+}
+
+body .ui-rating.ui-state-disabled .ui-rating-star, .ui-rating.ui-state-disabled .ui-rating-cancel{
+	margin-right: 0.1rem;
+}

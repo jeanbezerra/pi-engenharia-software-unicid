@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+<h:body>
+
+	<h:form id="formNovoPedido">
+		<ui:include src="/resources/components/navigation.xhtml" />
+
+
+		<div class="container">
+
+		<!-- Cabeçalho -->
+		<br />
+        <h2 class="text-primary mb-4">Novo Pedido</h2>
+        <hr />
+        
+        Número do pedido:
+        <p:outputLabel value="#{pedidoController.novoPedido.pedidoId}" />
+        <p:outputLabel value="#{pedidoController.pedidoID}" />
+        <br />
+        <br />
+
+        <!-- Seleção de Cliente -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p:outputLabel for="cliente" value="Cliente" styleClass="form-label" />
+                <p:selectOneMenu id="cliente" value="#{pedidoController.clienteID}" styleClass="form-select" required="true">
+                    <f:selectItem itemLabel="Selecione um cliente" itemValue="" />
+                    <f:selectItems value="#{pedidoController.clientesOptions}" var="cliente" />
+                </p:selectOneMenu>
+            </div>
+        </div>
+
+        <!-- Adicionar Produtos -->
+        <h4 class="text-secondary mt-4">Adicionar Produtos</h4>
+        <br />
+        
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p:outputLabel for="produto" value="Produto" styleClass="form-label" />
+                <p:selectOneMenu id="produto" value="#{pedidoController.produtoID}" styleClass="form-select" required="true">
+                    <f:selectItem itemLabel="Selecione um produto" itemValue="" />
+                    <f:selectItems value="#{pedidoController.produtosOptions}" var="produto" />
+                </p:selectOneMenu>
+            </div>
+            <div class="col-md-3">
+                <p:outputLabel for="quantidade" value="Quantidade *" styleClass="form-label" />
+                <p:inputText id="quantidade" value="#{pedidoController.produtoQTD}" styleClass="form-control" required="true" />
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <p:commandButton value="Adicionar Produto" 
+                                 action="#{pedidoController.adicionarItem}" 
+                                 update="formNovoPedido itensPedido" 
+                                 styleClass="btn btn-primary w-100" />
+            </div>
+        </div>
+
+        <!-- Tabela de Itens do Pedido -->
+        <h4 class="text-secondary mt-4">Itens do Pedido</h4>
+        <p:dataTable id="itensPedido" value="#{pedidoController.itensDataTable}" var="item" styleClass="table table-striped" emptyMessage="Nenhum produto adicionado ao pedido." responsiveLayout="scroll">
+        
+        	<p:column headerText="Item">
+                <h:outputText value="#{item.itemId}" />
+            </p:column>
+        
+            <p:column headerText="Produto">
+                <h:outputText value="#{item.produto.produtoId}" />
+            </p:column>
+            
+            <p:column headerText="Quantidade">
+                <h:outputText value="#{item.quantidade}" />
+            </p:column>
+            
+            <p:column headerText="Preço Unitário">
+                <h:outputText value="#{item.precoUnitario}">
+                    <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            
+            <p:column headerText="Total">
+			    <h:outputText value="#{item.quantidade * item.precoUnitario}">
+			        <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+			    </h:outputText>
+			</p:column>
+            
+        </p:dataTable>
+
+        <!-- Botão para Salvar Pedido -->
+        <div class="row mt-4">
+            <div class="col-md-4 offset-md-4">
+                <p:commandButton value="Salvar Pedido" 
+                                 action="#{pedidoController.salvarPedido}" 
+                                 styleClass="btn btn-success w-100" />
+            </div>
+        </div>
+
+
+		</div>
+
+
+	</h:form>
+
+	<ui:include src="/resources/components/scripts.xhtml" />
+
+</h:body>
+</html>

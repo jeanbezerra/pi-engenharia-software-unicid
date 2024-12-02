@@ -1,0 +1,104 @@
+.navbar {
+    background-color: #ff69b4 !important; /* Cor rosa temática */
+}
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive; /* Fonte personalizada */
+    color: #fff !important;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 30 30"><path stroke="rgba%280,0,0,0.5%29" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+}
+
+.btn-outline-light {
+    border-color: #fff;
+    color: #fff;
+}
+
+.btn-outline-light:hover {
+    background-color: #fff;
+    color: #ff69b4;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.spinner-border.text-primary {
+    color: #ff69b4; /* Spinner da cor rosa */
+}
+
+body {
+    font-family: Calibri !important;
+    margin: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.img-card {
+    width: 100%; /* A largura ocupará todo o espaço do card */
+    height: auto; /* Altura ajustada proporcionalmente */
+    max-height: 200px; /* Limita a altura máxima */
+    object-fit: cover; /* Preenche o espaço sem distorcer a imagem */
+    border-radius: 8px; /* Bordas arredondadas, opcional */
+}
+
+
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #264653;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+
+
+		/* Garante que o body ocupe toda a altura da página */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Configuração do layout com Flexbox */
+body.d-flex {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Faz o conteúdo principal ocupar o espaço disponível */
+main.flex-fill {
+    flex: 1;
+}

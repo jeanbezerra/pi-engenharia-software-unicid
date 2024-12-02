@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:include src="/resources/components/head.xhtml" />
+</h:head>
+
+<h:body class="d-flex flex-column min-vh-100">
+
+	<div class="container">
+		<h:form id="cartForm">
+
+			<ui:include src="/resources/components/navigation.xhtml" />
+
+			<main>
+				<br />
+				<h1>Carrinho</h1>
+				<br />
+
+				<p:dataTable value="#{cartController.cartItems}" var="item" responsive="true">
+					<p:column headerText="Produto">
+						<h:outputText value="#{item.product.nome}" />
+					</p:column>
+					<p:column headerText="Quantidade">
+						<h:inputText value="#{item.quantity}" size="3">							
+							<p:ajax listener="#{cartController.updateQuantity(item.product.id, item.quantity)}" update="cartForm"/>
+						</h:inputText>
+					</p:column>
+					<p:column headerText="Preço Unitário">
+						<h:outputText value="#{item.unitPrice}">
+							<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Subtotal">
+					    <h:outputText value="#{item.subtotal}">
+					        <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+					    </h:outputText>
+					</p:column>
+					<p:column>
+						<p:commandButton value="Remover" icon="pi pi-trash" action="#{cartController.removeFromCart(item.product.id)}" update="cartForm"/>
+					</p:column>
+				</p:dataTable>
+				<br />
+				<br />
+
+				<h2>
+					Total: 
+					<h:outputText value="#{cartController.total}">
+						<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+					</h:outputText>
+				</h2>
+				<br />
+
+				<h:panelGrid columns="3">
+					<h:column>
+						<p:commandButton value="Comprar" icon="pi pi-gift" action="#{pedidoController.gerarNovoPedidoFinalUser}"/>
+					</h:column>
+					<h:column>
+						
+					</h:column>
+					<h:column>
+						<p:commandButton value="Limpar Carrinho" action="#{cartController.clearCart}" icon="pi pi-trash" update="cartForm"/>
+					</h:column>
+				</h:panelGrid>
+
+
+			</main>
+		</h:form>
+
+	</div>
+
+	<ui:include src="/resources/components/footer.xhtml" />
+</h:body>
+</html>
