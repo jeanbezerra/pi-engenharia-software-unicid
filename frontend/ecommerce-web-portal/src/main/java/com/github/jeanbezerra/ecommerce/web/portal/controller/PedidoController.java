@@ -10,7 +10,6 @@ import com.github.jeanbezerra.ecommerce.web.portal.dao.ClienteDAO;
 import com.github.jeanbezerra.ecommerce.web.portal.dao.PedidoDAO;
 import com.github.jeanbezerra.ecommerce.web.portal.dao.PedidoItemDAO;
 import com.github.jeanbezerra.ecommerce.web.portal.dao.ProdutoDAO;
-import com.github.jeanbezerra.ecommerce.web.portal.dto.ProdutoDTO;
 import com.github.jeanbezerra.ecommerce.web.portal.entity.CartItem;
 import com.github.jeanbezerra.ecommerce.web.portal.entity.ItemPedido;
 import com.github.jeanbezerra.ecommerce.web.portal.entity.Pedido;
@@ -36,16 +35,16 @@ public class PedidoController implements Serializable {
 	private AuthenticationController authenticationController;
 
 	@Inject
-	private ClienteDAO clienteDAO;
+	private ClienteDAO clienteDAO = new ClienteDAO();
 
 	@Inject
-	private ProdutoDAO produtoDAO;
+	private ProdutoDAO produtoDAO = new ProdutoDAO();
 
 	@Inject
-	private PedidoDAO pedidoDAO;
+	private PedidoDAO pedidoDAO = new PedidoDAO();
 
 	@Inject
-	private PedidoItemDAO pedidoItemDAO;
+	private PedidoItemDAO pedidoItemDAO = new PedidoItemDAO();
 	
 	@Inject
 	private CartController cartController;
@@ -58,11 +57,14 @@ public class PedidoController implements Serializable {
 	private List<ItemPedido> itensDataTable = new ArrayList<>();
 	private List<SelectItem> clientesOptions = new ArrayList<>();
 	private List<SelectItem> produtosOptions = new ArrayList<>();
+	private List<Pedido> meusPedidos = new ArrayList<>();
 
 	private Long pedidoID = 0L;
 	private Long clienteID = 0L;
 	private Long produtoID = 0L;
 	private Integer produtoQTD;
+	
+	private String orderNumber;
 
 	@PostConstruct
 	public void init() {
@@ -96,7 +98,7 @@ public class PedidoController implements Serializable {
 	public String gerarNovoPedidoFinalUser() {
 		try {
 			
-			String email = this.authenticationController.getUser().getUsername();
+			String email = this.authenticationController.getUser().getEmail();
 			
 			reloadAll();
 			novoPedido = new Pedido();
@@ -127,12 +129,15 @@ public class PedidoController implements Serializable {
 				
 			}
 			
+			this.orderNumber = this.novoPedido.getPedidoId().toString();
+			
 			for (ItemPedido itemParaSalvar : itens) {
 				pedidoItemDAO.salvarItemPedido(itemParaSalvar);
 			}	
 
 			
 			reloadAll();
+			this.cartController.clearCart();
 			
 			return "order-new.jsf?faces-redirect=true";
 		} catch (Exception e) {
@@ -204,6 +209,7 @@ public class PedidoController implements Serializable {
 		novoItem = new ItemPedido();
 		pedidoSelecionado = new Pedido();
 		itensDataTable.clear();
+		this.meusPedidos = this.pedidoDAO.findPedidosByEmail(this.authenticationController.getCliente().getEmail());
 	}
 
 	private void validarItem() {
@@ -309,4 +315,22 @@ public class PedidoController implements Serializable {
 		this.produtoQTD = produtoQTD;
 	}
 
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public List<Pedido> getMeusPedidos() {
+		return meusPedidos;
+	}
+
+	public void setMeusPedidos(List<Pedido> meusPedidos) {
+		this.meusPedidos = meusPedidos;
+	}
+
+	
+	
 }

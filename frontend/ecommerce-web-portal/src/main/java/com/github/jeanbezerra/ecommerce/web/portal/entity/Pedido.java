@@ -2,7 +2,10 @@ package com.github.jeanbezerra.ecommerce.web.portal.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+
+import com.github.jeanbezerra.ecommerce.web.portal.util.DateUtils;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -98,5 +101,11 @@ public class Pedido implements Serializable {
 		return "Pedido [pedidoId=" + pedidoId + ", cliente=" + cliente + ", dataPedido=" + dataPedido + ", status="
 				+ status + ", items=" + items + "]";
 	}
+	
+	public Date getDate() {
+        return DateUtils.toDate(this.dataPedido);
+    }
+
+
 
 }

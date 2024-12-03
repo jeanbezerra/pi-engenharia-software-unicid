@@ -20,8 +20,14 @@ public class HibernateEntityManagerHelper implements Serializable {
 	private static ThreadLocal<EntityManager> threadLocal;
 
 	static {
-		emf = Persistence.createEntityManagerFactory("web-unit");
-		threadLocal = new ThreadLocal<>();
+		if (!isTestEnvironment()) {
+			emf = Persistence.createEntityManagerFactory("web-unit");
+			threadLocal = new ThreadLocal<>();
+		}
+	}
+
+	private static boolean isTestEnvironment() {
+		return "test".equals(System.getProperty("env"));
 	}
 
 	public static EntityManager getEntityManager() {
@@ -36,11 +42,15 @@ public class HibernateEntityManagerHelper implements Serializable {
 	}
 
 	public static void closeEntityManager() {
-		EntityManager em = threadLocal.get();
-		if (em != null && em.isOpen()) {
-			System.out.println(em.getDelegate());
-			em.close();
-			threadLocal.remove();
+		EntityManager entityManager = getEntityManager();
+		if (entityManager != null) {
+			try {
+				entityManager.close();
+			} catch (Exception e) {
+				throw new RuntimeException("Failed to close EntityManager", e);
+			} finally {
+				getThreadLocal().remove();
+			}
 		}
 	}
 
@@ -68,4 +78,13 @@ public class HibernateEntityManagerHelper implements Serializable {
 			em.getTransaction().commit();
 		}
 	}
+
+	public static ThreadLocal<EntityManager> getThreadLocal() {
+		return threadLocal;
+	}
+
+	public static void setThreadLocal(ThreadLocal<EntityManager> threadLocal) {
+		HibernateEntityManagerHelper.threadLocal = threadLocal;
+	}
+
 }

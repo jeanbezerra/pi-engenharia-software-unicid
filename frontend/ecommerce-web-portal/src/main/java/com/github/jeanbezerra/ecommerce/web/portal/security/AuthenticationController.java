@@ -1,7 +1,6 @@
 package com.github.jeanbezerra.ecommerce.web.portal.security;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +16,9 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.subject.Subject;
 
+import com.github.jeanbezerra.ecommerce.web.portal.dao.ClienteDAO;
 import com.github.jeanbezerra.ecommerce.web.portal.dao.UserDAO;
+import com.github.jeanbezerra.ecommerce.web.portal.entity.Cliente;
 import com.github.jeanbezerra.ecommerce.web.portal.entity.UserEntity;
 
 import jakarta.annotation.PostConstruct;
@@ -40,6 +41,12 @@ public class AuthenticationController implements Serializable {
 	private static final String HOME_PAGE = "index.jsf?faces-redirect=true";
 	private static final String REGISTER_PAGE = "register.jsf?faces-redirect=true";
 	private static final String SUCCESSFULLY_REGISTERED_PAGE = "successfullyRegistered.jsf?faces-redirect=true";
+
+	@Inject
+	private Cliente cliente;
+
+	@Inject
+	private ClienteDAO clienteDAO;
 
 	@Inject
 	private UserEntity user;
@@ -84,46 +91,53 @@ public class AuthenticationController implements Serializable {
 			this.user = new UserEntity();
 			this.user = this.userDAO.readObject(this.fieldUsername);
 			
+			this.cliente = this.clienteDAO.findByEmail(this.fieldUsername);
+
 			String tempUserParam = StringUtils.normalizeSpace(this.fieldUsername);
 			String tempPassParam = StringUtils.normalizeSpace(this.fieldPassword);
-				
+
 			final UsernamePasswordToken token = new UsernamePasswordToken(tempUserParam, tempPassParam.toCharArray());
 			this.currentUser = SecurityUtils.getSubject();
 			this.currentUser.login(token);
 			LOGGER.info("KB-SEC-0001 Authentication transaction processed successfully");
-			
+
 			FacesContext fc = FacesContext.getCurrentInstance();
 			ExternalContext ec = fc.getExternalContext();
 			this.loggedIn = true;
 			ec.redirect(HOME_PAGE);
 
 		} catch (UnknownAccountException uae) {
-			//uae.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", "Your username wrong"));
+			// uae.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Problema com seu usuário"));
 			resetForm();
 			this.loggedIn = false;
-			LOGGER.error("KB-SEC-0002 Your username wrong");			
+			LOGGER.error("KB-SEC-0002 Your username wrong");
 		} catch (IncorrectCredentialsException ice) {
-			//ice.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", "Password is incorrect"));			
+			// ice.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Senha incorreta"));
 			resetForm();
 			this.loggedIn = false;
 			LOGGER.error("KB-SEC-0003 Password is incorrect");
 		} catch (LockedAccountException lae) {
-			//lae.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", "This username is locked"));
+			// lae.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Conta bloqueada"));
 			resetForm();
 			this.loggedIn = false;
 			LOGGER.error("KB-SEC-0004 This username is locked");
 		} catch (AuthenticationException aex) {
-			//aex.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", aex.getMessage()));			
+			// aex.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", aex.getMessage()));
 			resetForm();
 			this.loggedIn = false;
 			LOGGER.error("KB-SEC-0005 Generic Exception Authentication");
-		}catch (Exception e) {
-			//e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login failed!", e.getMessage()));
+		} catch (Exception e) {
+			// e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
 			resetForm();
 			this.loggedIn = false;
 			LOGGER.error("KB-SEC-006 Generic Exception");
@@ -136,7 +150,7 @@ public class AuthenticationController implements Serializable {
 			nh.handleNavigation(FacesContext.getCurrentInstance(), null, HOME_PAGE);
 		}
 	}
-	
+
 	public String registerRedirect() {
 		try {
 			resetForm();
@@ -149,14 +163,14 @@ public class AuthenticationController implements Serializable {
 
 	public String registerNewUser() {
 		try {
-			
+
 			RandomNumberGenerator rng = new SecureRandomNumberGenerator();
 			Object salt = rng.nextBytes();
 			String hashedPasswordBase64 = new Sha256Hash(this.user.getPassword(), salt, 1024).toBase64();
 
-			this.user.setId(UUID.randomUUID().toString());			
 			this.user.setPassword(hashedPasswordBase64);
 			this.user.setPasswordSalt(salt.toString());
+			// this.userDAO.persistObject(this.user);
 			this.userDAO.persistObject(this.user);
 
 			return SUCCESSFULLY_REGISTERED_PAGE;
@@ -165,14 +179,13 @@ public class AuthenticationController implements Serializable {
 			return HOME_PAGE;
 		}
 	}
-	
+
 	public String resetForm() {
 		this.fieldUsername = null;
 		this.fieldPassword = null;
 		return logout();
 	}
-	
-	@Deprecated
+
 	public String logout() {
 		try {
 
@@ -192,50 +205,14 @@ public class AuthenticationController implements Serializable {
 			return HOME_PAGE;
 		}
 	}
-	
-//	public String logout() {
-//	    try {
-//	        // Realiza o logout do sujeito atual
-//	        SecurityUtils.getSubject().logout();
-//
-//	        // Obtém o SecurityManager como uma interface genérica
-//	        SecurityManager securityManager = SecurityUtils.getSecurityManager();
-//
-//	        // Verifica se o SecurityManager suporta sessões (SessionManager)
-//	        if (securityManager instanceof org.apache.shiro.mgt.SessionManager) {
-//	            org.apache.shiro.mgt.SessionManager sessionManager =
-//	                (org.apache.shiro.mgt.SessionManager) securityManager;
-//
-//	            if (sessionManager instanceof org.apache.shiro.session.mgt.SessionManager) {
-//	                org.apache.shiro.session.mgt.SessionManager defaultSessionManager =
-//	                    (org.apache.shiro.session.mgt.SessionManager) sessionManager;
-//
-//	                // Obtém todas as sessões ativas (usando DAO, se suportado)
-//	                if (defaultSessionManager instanceof DefaultSessionManager) {
-//	                    DefaultSessionManager manager = (DefaultSessionManager) defaultSessionManager;
-//
-//	                    Collection<Session> activeSessions =
-//	                        manager.getSessionDAO().getActiveSessions();
-//
-//	                    // Finaliza todas as sessões que pertencem ao usuário atual
-//	                    for (Session session : activeSessions) {
-//	                        if (SecurityUtils.getSubject().getSession().getId().equals(session.getId())) {
-//	                            session.stop();
-//	                        }
-//	                    }
-//	                }
-//	            }
-//	        }
-//
-//	        // Redireciona para a página de login
-//	        return "/authentication?faces-redirect=true";
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	        // Redireciona para a página inicial em caso de erro
-//	        return HOME_PAGE;
-//	    }
-//	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public UserEntity getUser() {
 		return user;
@@ -284,7 +261,6 @@ public class AuthenticationController implements Serializable {
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-	
-	
 
+	
 }

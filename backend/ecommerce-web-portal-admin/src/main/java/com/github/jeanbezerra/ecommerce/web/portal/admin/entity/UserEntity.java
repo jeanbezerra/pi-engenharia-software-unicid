@@ -37,12 +37,15 @@ public class UserEntity implements Serializable {
 	@Column(name = "remember_me")
 	private boolean rememberMe;
 
+	@Column(name = "email")
+	private String email;
+
 	public UserEntity() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserEntity(String id, String username, String password, String passwordSalt, String name,
-			boolean rememberMe) {
+	public UserEntity(String id, String username, String password, String passwordSalt, String name, boolean rememberMe,
+			String email) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -50,6 +53,7 @@ public class UserEntity implements Serializable {
 		this.passwordSalt = passwordSalt;
 		this.name = name;
 		this.rememberMe = rememberMe;
+		this.email = email;
 	}
 
 	public String getId() {
@@ -100,10 +104,18 @@ public class UserEntity implements Serializable {
 		this.rememberMe = rememberMe;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt="
-				+ passwordSalt + ", name=" + name + ", rememberMe=" + rememberMe + "]";
+				+ passwordSalt + ", name=" + name + ", rememberMe=" + rememberMe + ", email=" + email + "]";
 	}
 
 }

@@ -1,33 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-
+<html lang="pt_BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html"
+	xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite"
+	xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Minha Conta</title>
+	<ui:include src="/resources/components/head.xhtml" />
 </h:head>
 
-<h:body>
-    <h1>Minha Conta</h1>
-    <h:panelGrid columns="2">
-        <h:outputLabel value="Nome:" />
-        <h:outputText value="#{userController.user.name}" />
+<h:body class="d-flex flex-column min-vh-100">
 
-        <h:outputLabel value="Email:" />
-        <h:outputText value="#{userController.user.email}" />
-    </h:panelGrid>
+	<div class="container">
+		<h:form id="cartForm">
 
-    <h2>Meus Pedidos</h2>
-    <p:dataTable value="#{orderController.orders}" var="order">
-        <p:column headerText="ID">
-            <h:outputText value="#{order.id}" />
-        </p:column>
-        <p:column headerText="Data">
-            <h:outputText value="#{order.date}" />
-        </p:column>
-        <p:column headerText="Status">
-            <h:outputText value="#{order.status}" />
-        </p:column>
-    </p:dataTable>
+			<ui:include src="/resources/components/navigation.xhtml" />
+
+			<main>
+				<br />
+				<h1>Minha Conta</h1>
+				<hr />
+
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:column>
+						Nome:
+					</h:column>
+					<h:column>
+						<h:outputText value="#{authenticationController.user.name}" />
+					</h:column>
+
+					<h:column>
+						E-mail:
+					</h:column>
+					<h:column>
+						<h:outputText value="#{authenticationController.user.email}" />
+					</h:column>
+<!-- 					<h:column> -->
+<!-- 						Código de validação: -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<h:outputText value="#{authenticationController.user.id}" /> -->
+<!-- 					</h:column> -->
+					<h:column>
+						Código de Cliente:
+					</h:column>
+					<h:column>
+						<h:outputText value="#{authenticationController.cliente.clienteId}" />
+					</h:column>					
+				</h:panelGrid>
+				<br />
+
+				<h2>Meus Pedidos</h2>
+				<p:dataTable value="#{pedidoController.pedidos}" var="pedido">
+					<p:column headerText="ID">
+						<h:outputText value="#{pedido.pedidoId}" />
+					</p:column>
+					<p:column headerText="Data">
+						<h:outputText value="#{pedido.date}" >
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Status">
+						<h:outputText value="#{pedido.status}" />
+					</p:column>
+					<p:column headerText="Quantidade de Itens">
+						<h:outputText value="#{pedido.items.size()}" />
+					</p:column>
+				</p:dataTable>
+
+			</main>
+		</h:form>
+    </div>
+    
+	<ui:include src="/resources/components/footer.xhtml" />
 </h:body>
 </html>

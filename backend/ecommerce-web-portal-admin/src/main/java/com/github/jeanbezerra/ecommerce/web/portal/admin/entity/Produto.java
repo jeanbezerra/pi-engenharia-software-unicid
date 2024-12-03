@@ -2,6 +2,7 @@ package com.github.jeanbezerra.ecommerce.web.portal.admin.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "produtos")
@@ -23,12 +26,14 @@ public class Produto implements Serializable {
 	@Column(name = "produto_id", unique = true)
 	private Long produtoId;
 
+	@NotNull
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
 	@Column(name = "descricao")
 	private String descricao;
 
+	@Positive
 	@Column(name = "preco", nullable = false)
 	private BigDecimal preco;
 
@@ -118,6 +123,21 @@ public class Produto implements Serializable {
 	public String toString() {
 		return "Produto [produtoId=" + produtoId + ", nome=" + nome + ", descricao=" + descricao + ", preco=" + preco
 				+ ", estoque=" + estoque + ", imagemUrl=" + imagemUrl + ", categoria=" + categoria + "]";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Produto produto = (Produto) o;
+		return Objects.equals(produtoId, produto.produtoId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(produtoId);
 	}
 
 }

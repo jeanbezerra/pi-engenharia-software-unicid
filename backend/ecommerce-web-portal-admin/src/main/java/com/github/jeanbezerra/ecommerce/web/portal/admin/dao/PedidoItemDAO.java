@@ -33,7 +33,7 @@ public class PedidoItemDAO implements Serializable {
 			if (entityManager != null && entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().rollback();
 			}
-			e.printStackTrace();
+			// Lança a exceção sem logá-la
 			throw new RuntimeException("Erro ao salvar o item do pedido.", e);
 		} finally {
 			if (entityManager != null) {
@@ -57,7 +57,6 @@ public class PedidoItemDAO implements Serializable {
 			if (entityManager != null && entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().rollback();
 			}
-			e.printStackTrace();
 			throw new RuntimeException("Erro ao atualizar o item do pedido.", e);
 		} finally {
 			if (entityManager != null) {
@@ -70,6 +69,10 @@ public class PedidoItemDAO implements Serializable {
 	 * Deletar um item do pedido no banco de dados.
 	 */
 	public void deletarItemPedido(ItemPedido itemPedido) {
+		if (itemPedido == null) {
+			throw new IllegalArgumentException("ItemPedido não pode ser nulo");
+		}
+
 		EntityManager entityManager = null;
 
 		try {
@@ -135,19 +138,23 @@ public class PedidoItemDAO implements Serializable {
 	/**
 	 * Buscar um item específico por ID.
 	 */
-	public ItemPedido buscarItemPorId(Long itemId) {
+	public ItemPedido buscarItemPorId(Long id) {
+		if (id == null) {
+			return null; // Retorna null diretamente se o ID for nulo
+		}
+
 		EntityManager entityManager = null;
 
 		try {
 			entityManager = HibernateEntityManagerHelper.getEntityManager();
-			return entityManager.find(ItemPedido.class, itemId);
+			return entityManager.find(ItemPedido.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Erro ao buscar item do pedido por ID.", e);
+			throw new RuntimeException("Erro ao buscar item do pedido por ID.", e); // Preserva a causa original
 		} finally {
 			if (entityManager != null) {
 				HibernateEntityManagerHelper.closeEntityManager();
 			}
 		}
 	}
+
 }

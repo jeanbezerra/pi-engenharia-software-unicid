@@ -82,18 +82,25 @@ public class ClienteDAO implements Serializable {
 	}
 	
 	public Cliente findByEmail(String email) {
-		EntityManager entityManager = null;
-		try {
-			entityManager = HibernateEntityManagerHelper.getEntityManager();
-			return entityManager.find(Cliente.class, email);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			if (entityManager != null) {
-				HibernateEntityManagerHelper.closeEntityManager();
-			}
-		}
+	    EntityManager entityManager = null;
+	    try {
+	        entityManager = HibernateEntityManagerHelper.getEntityManager();
+	        
+	        // Usando native query
+	        String sql = "SELECT * FROM clientes WHERE email = ?";
+	        Object result = entityManager.createNativeQuery(sql, Cliente.class)
+	                                     .setParameter(1, email)
+	                                     .getSingleResult();
+
+	        return (Cliente) result; // Converter o resultado para a entidade Cliente
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null; // Retorna null em caso de exceção
+	    } finally {
+	        if (entityManager != null) {
+	            HibernateEntityManagerHelper.closeEntityManager();
+	        }
+	    }
 	}
 
 	public List<Cliente> findAll() {

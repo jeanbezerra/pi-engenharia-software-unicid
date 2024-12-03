@@ -14,11 +14,24 @@
 	<h:form>
 	<div class="container">
 	
-		<ui:include src="/resources/components/navigation.xhtml" />
+	<ui:include src="/resources/components/navigation.xhtml" />
+	
+		 <main class="container text-center my-5">
+		 
+		 	<div class="card" style="padding: 10px;">
+	        	<div class="row justify-content-center">	        	
+		            <div class="col-md-8">
+		                <h2 class="text-dark mb-4">Seu pedido foi gerado</h2>
+		                <p class="display-1 text-success font-weight-bold">#{pedidoController.orderNumber}</p>
+		            </div>
+	            </div>
+	        </div>
+	    </main>
+	
+		
 
-		<br />
-		<h1>Seu pedido foi gerado</h1>
-		<br />
+		
+		
 
 		
 

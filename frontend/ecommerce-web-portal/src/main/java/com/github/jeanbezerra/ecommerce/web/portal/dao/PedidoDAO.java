@@ -42,6 +42,34 @@ public class PedidoDAO implements Serializable {
 		}
 	}
 	
+	public List<Pedido> findPedidosByEmail(String email) {
+	    EntityManager entityManager = null;
+
+	    try {
+	        entityManager = HibernateEntityManagerHelper.getEntityManager();
+
+	        // Carregar pedidos de um cliente específico com itens e produtos
+	        TypedQuery<Pedido> query = entityManager.createQuery(
+	            "SELECT DISTINCT p FROM Pedido p " +
+	            "LEFT JOIN FETCH p.items i " +
+	            "LEFT JOIN FETCH i.produto " +
+	            "LEFT JOIN FETCH p.cliente c " +
+	            "WHERE c.email = :email", Pedido.class);
+	        
+	        query.setParameter("email", email);
+
+	        return query.getResultList();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    } finally {
+	        if (entityManager != null) {
+	            HibernateEntityManagerHelper.closeEntityManager();
+	        }
+	    }
+	}
+
+	
 	public void atualizarPedido(Pedido pedido) {
 	    EntityManager entityManager = null;
 
