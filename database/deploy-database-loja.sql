@@ -51,18 +51,12 @@ CREATE TABLE pagamentos (
     FOREIGN KEY (pedido_id) REFERENCES pedidos(pedido_id)
 );
 
-
---Meta
---truncate table clientes cascade;
+-- Metadata
 INSERT INTO users (id, name, password, password_salt, username, email) VALUES ('d4dbc31d-8a96-45d5-96d1-97f5e4d5c495', 'Administrador', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=', '++No6iyBL3kP8q7hyECs3g==', 'admin','admin@admin');
 INSERT INTO clientes (nome, email, password,password_salt, endereco, telefone) VALUES ('Maria Oliveira', 'maria.oliveira@email.com', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=','++No6iyBL3kP8q7hyECs3g==', 'Avenida Brasil, 456 - Rio de Janeiro', '(21) 99999-1234');
 INSERT INTO users (id, name, password, password_salt, username, email) VALUES ('2b3c4d5e-6789-1011-1213-141516171819', 'Maria Oliveira', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=', '++No6iyBL3kP8q7hyECs3g==', 'maria.oliveira@email.com','maria.oliveira@email.com');
-
 commit;
 
-
-
-truncate table categorias cascade;
 INSERT INTO categorias (categoria_id, nome) VALUES (1, 'Cupcakes Clássicos');
 INSERT INTO categorias (categoria_id, nome) VALUES (2, 'Cupcakes Recheados');
 INSERT INTO categorias (categoria_id, nome) VALUES (3, 'Cupcakes de Chocolate');
@@ -75,8 +69,6 @@ INSERT INTO categorias (categoria_id, nome) VALUES (9, 'Cupcakes de Festa');
 INSERT INTO categorias (categoria_id, nome) VALUES (10, 'Cupcakes Temáticos');
 commit;
 
-
-truncate table produtos cascade;
 INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake de Baunilha', 'Cupcake clássico de baunilha com cobertura de chantilly.', 12.50, 50, 1, 'https://th.bing.com/th/id/OIP.NfdtbPfZmCLqP4JhFVNwnAHaHa?rs=1&pid=ImgDetMain');
 INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake de Morango', 'Cupcake clássico com pedaços de morango e cobertura.', 13.50, 60, 1, 'https://bing.com/th?id=OSK.ca72312364df13eefc7f77dfc0bd1e0f');
 INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake de Brigadeiro', 'Cupcake recheado com brigadeiro e cobertura de chocolate.', 15.00, 40, 2, 'https://th.bing.com/th/id/OIP.PdG4nlk2CUNL9PPdN5Ef-wHaLH?rs=1&pid=ImgDetMain');
@@ -86,34 +78,3 @@ INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url)
 INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake Vegano de Limão', 'Cupcake vegano com sabor de limão e cobertura de coco.', 16.50, 25, 6, 'https://th.bing.com/th/id/OIP.RfQMaGj5W0uz7hiOKyDxvAHaE8?rs=1&pid=ImgDetMain');
 INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake de Aniversário', 'Cupcake decorado para festas de aniversário.', 16.00, 50, 9, 'https://bing.com/th?id=OSK.d415a18d1a5c9eb4c452b0fcdcf5cc81');
 commit;
-
-
-
--- Inserts para simular dados
-
--- Inserindo categorias
-INSERT INTO categorias (nome) VALUES ('Cupcakes Clássicos');
-INSERT INTO categorias (nome) VALUES ('Cupcakes Gourmet');
-INSERT INTO categorias (nome) VALUES ('Cupcakes Veganos');
-
--- Inserindo produtos
-INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake de Chocolate', 'Cupcake clássico de chocolate com cobertura de ganache', 10.00, 100, 1, 'url_cupcake_chocolate.jpg');
-INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake Red Velvet', 'Cupcake gourmet de red velvet com cream cheese', 12.50, 50, 2, 'url_cupcake_red_velvet.jpg');
-INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_url) VALUES ('Cupcake Vegano de Baunilha', 'Cupcake vegano de baunilha com cobertura de creme de coco', 11.00, 30, 3, 'url_cupcake_vegano.jpg');
-
--- Inserindo clientes
-INSERT INTO clientes (nome, email, senha, endereco, telefone) VALUES ('João Silva', 'joao.silva@example.com', 'senha123', 'Rua das Flores, 123', '11999999999');
-INSERT INTO clientes (nome, email, senha, endereco, telefone) VALUES ('Maria Oliveira', 'maria.oliveira@example.com', 'senha456', 'Av. Paulista, 1000', '11888888888');
-
--- Inserindo pedidos
-INSERT INTO pedidos (cliente_id, data_pedido, status) VALUES (1, CURRENT_TIMESTAMP, 'Pendente');
-INSERT INTO pedidos (cliente_id, data_pedido, status) VALUES (2, CURRENT_TIMESTAMP, 'Enviado');
-
--- Inserindo itens do pedido
-INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (1, 1, 2, 10.00);
-INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (1, 3, 1, 11.00);
-INSERT INTO itens_pedido (pedido_id, produto_id, quantidade, preco_unitario) VALUES (2, 2, 3, 12.50);
-
--- Inserindo pagamentos
-INSERT INTO pagamentos (pedido_id, tipo_pagamento, status_pagamento, data_pagamento) VALUES (1, 'Cartão de Crédito', 'Aprovado', CURRENT_TIMESTAMP);
-INSERT INTO pagamentos (pedido_id, tipo_pagamento, status_pagamento, data_pagamento) VALUES (2, 'Boleto', 'Pendente', CURRENT_TIMESTAMP);
