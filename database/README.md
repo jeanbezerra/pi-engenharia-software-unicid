@@ -1,5 +1,9 @@
 # README: Estrutura do Banco de Dados para E-commerce de Cupcakes
 
+## DER - Diagram Entidade Realacionamento
+
+![alt text](der-diagrama-entidade-relacionamento.png "DER")
+
 ## Tabelas do Banco de Dados
 
 ### 1. Tabela `categorias`
