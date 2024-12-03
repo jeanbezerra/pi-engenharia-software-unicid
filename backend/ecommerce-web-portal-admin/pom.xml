@@ -37,6 +37,84 @@
 	</repositories>
 	<dependencies>
 
+		<!-- Jakarta EE 9.1 -->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.platform</groupId>-->
+		<!--			<artifactId>jakarta.jakartaee-api</artifactId>-->
+		<!--			<version>9.1.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.sun.mail</groupId>-->
+		<!--			<artifactId>jakarta.mail</artifactId>-->
+		<!--			<version>2.0.1</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.activation</groupId>-->
+		<!--			<artifactId>jakarta.activation-api</artifactId>-->
+		<!--			<version>2.0.1</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.authorization</groupId>-->
+		<!--			<artifactId>jakarta.authorization-api</artifactId>-->
+		<!--			<version>2.0.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.batch</groupId>-->
+		<!--			<artifactId>jakarta.batch-api</artifactId>-->
+		<!--			<version>2.0.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.enterprise.concurrent</groupId>-->
+		<!--			<artifactId>jakarta.enterprise.concurrent-api</artifactId>-->
+		<!--			<version>3.0.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.jms</groupId>-->
+		<!--			<artifactId>jakarta.jms-api</artifactId>-->
+		<!--			<version>3.0.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.jws</groupId>-->
+		<!--			<artifactId>jakarta.jws-api</artifactId>-->
+		<!--			<version>3.0.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.mail</groupId>-->
+		<!--			<artifactId>jakarta.mail-api</artifactId>-->
+		<!--			<version>2.0.1</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.platform</groupId>-->
+		<!--			<artifactId>jakarta.jakartaee-web-api</artifactId>-->
+		<!--			<version>9.1.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.resource</groupId>-->
+		<!--			<artifactId>jakarta.resource-api</artifactId>-->
+		<!--			<version>2.0.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.xml.bind</groupId>-->
+		<!--			<artifactId>jakarta.xml.bind-api</artifactId>-->
+		<!--			<version>3.0.1</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.xml.soap</groupId>-->
+		<!--			<artifactId>jakarta.xml.soap-api</artifactId>-->
+		<!--			<version>2.0.1</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>jakarta.xml.ws</groupId>-->
+		<!--			<artifactId>jakarta.xml.ws-api</artifactId>-->
+		<!--			<version>3.0.1</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.glassfish</groupId>-->
+		<!--			<artifactId>jakarta.faces</artifactId>-->
+		<!--			<version>3.0.0</version>-->
+		<!--		</dependency>-->
+
+
 		<!-- Jakarta EE 10 -->
 		<dependency>
 			<groupId>jakarta.platform</groupId>
@@ -72,7 +150,7 @@
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-web-api</artifactId>
 			<version>10.0.0</version>
-			<!--<scope>provided</scope>-->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.resource</groupId>
@@ -154,22 +232,27 @@
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet-shaded</artifactId>
-			<version>6.0.0.CR1</version>
+			<!--			<version>6.0.0.CR1</version>-->
+			<version>5.1.3.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-api</artifactId>
-			<version>6.0.CR1</version>
+			<!--			<version>6.0.CR1</version>-->
+			<version>5.0.SP3</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jboss.weld.module</groupId>
 			<artifactId>weld-jsf</artifactId>
-			<version>6.0.0.CR1</version>
+			<!--			<version>6.0.0.CR1</version>-->
+			<version>5.1.3.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-core-impl</artifactId>
-			<version>6.0.0.CR1</version>
+			<!--			<version>6.0.0.CR1</version>-->
+			<version>5.1.3.Final</version>
 		</dependency>
 
 		<!-- JSF 4 -->
@@ -361,6 +444,43 @@
 			<version>${apache.shiro.version}</version>
 			<classifier>jakarta</classifier>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-crypto-cipher</artifactId>
+			<version>${apache.shiro.version}</version>
+			<classifier>jakarta</classifier>
+		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.shiro</groupId>-->
+		<!--			<artifactId>shiro-event</artifactId>-->
+		<!--			<version>${apache.shiro.version}</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.shiro</groupId>-->
+		<!--			<artifactId>shiro-config-core</artifactId>-->
+		<!--			<version>${apache.shiro.version}</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.shiro</groupId>-->
+		<!--			<artifactId>shiro-crypto-hash</artifactId>-->
+		<!--			<version>${apache.shiro.version}</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.shiro</groupId>-->
+		<!--			<artifactId>shiro-cache</artifactId>-->
+		<!--			<version>${apache.shiro.version}</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.shiro</groupId>-->
+		<!--			<artifactId>shiro-lang</artifactId>-->
+		<!--			<version>${apache.shiro.version}</version>-->
+		<!--		</dependency>-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2 </artifactId>
+			<version>2.11.0</version>
+		</dependency>
+
 
 		<!-- JSON Frameworks -->
 		<dependency>
@@ -486,6 +606,15 @@
 
 	<build>
 		<finalName>admin</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>META-INF/persistence.xml</include>
+					<include>log4j2.xml</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -544,6 +673,14 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.3.1</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -565,40 +702,13 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.5.0</version>
-				<executions>
-					<execution>
-						<id>enforce-java</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>[17,)</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.11.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>3.4.0</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
-					</archive>
-				</configuration>
+				<version>3.2.2</version>
 			</plugin>
 		</plugins>
 	</build>
