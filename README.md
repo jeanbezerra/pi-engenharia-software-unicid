@@ -26,8 +26,10 @@ Este projeto faz parte da disciplina **Projeto Integrador Transdisciplinar** do 
 
 ## Acesso a demonstração
 
---
+**URL:** http://18.228.201.187:8080/portal
+**Usuário:** admin
+**Senha:** maria.oliveira@email.com
 
-## Video de demonstração
-
---
+**URL:** http://18.228.201.187:8080/admin
+**Usuário:** admin
+**Senha:** admin

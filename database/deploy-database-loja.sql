@@ -52,7 +52,7 @@ CREATE TABLE pagamentos (
 );
 
 -- Metadata
-INSERT INTO users (id, name, password, password_salt, username, email) VALUES ('d4dbc31d-8a96-45d5-96d1-97f5e4d5c495', 'Administrador', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=', '++No6iyBL3kP8q7hyECs3g==', 'admin','admin@admin');
+INSERT INTO users (id, name, password, password_salt, username, email) VALUES ('d4dbc31d-8a96-45d5-96d1-97f5e4d5c495', 'Administrador', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=', '++No6iyBL3kP8q7hyECs3g==', 'admin','admin');
 INSERT INTO clientes (nome, email, password,password_salt, endereco, telefone) VALUES ('Maria Oliveira', 'maria.oliveira@email.com', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=','++No6iyBL3kP8q7hyECs3g==', 'Avenida Brasil, 456 - Rio de Janeiro', '(21) 99999-1234');
 INSERT INTO users (id, name, password, password_salt, username, email) VALUES ('2b3c4d5e-6789-1011-1213-141516171819', 'Maria Oliveira', 'LKL96FsBEjMBo4mfAD2YjthnT6x7jjQGof/+MZGPch4=', '++No6iyBL3kP8q7hyECs3g==', 'maria.oliveira@email.com','maria.oliveira@email.com');
 commit;
