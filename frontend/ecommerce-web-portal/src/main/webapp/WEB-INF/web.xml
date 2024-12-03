@@ -161,36 +161,21 @@
 	<!-- Error Page Custom -->
 	<error-page>
 		<error-code>404</error-code>
-		<location>/404.jsf</location> <!-- /src/main/webapp/404.html -->
+		<location>/404.jsf</location>
 	</error-page>
 
 	<error-page>
 		<error-code>400</error-code>
-		<location>/400.jsf</location> <!-- /src/main/webapp/404.html -->
+		<location>/400.jsf</location>
 	</error-page>
 
 	<error-page>
 		<error-code>500</error-code>
-		<location>/500.jsf</location> <!-- /src/main/webapp/500.html -->
+		<location>/500.jsf</location>
 	</error-page>
 
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
-
-	<!-- Apache Shiro - Security Framework -->
-	<!-- <listener> -->
-	<!-- <listener-class>org.apache.shiro.ee.listeners.EnvironmentLoaderListener</listener-class> -->
-	<!-- </listener> -->
-
-	<!-- <filter> -->
-	<!-- <filter-name>ShiroFilter</filter-name> -->
-	<!-- <filter-class>org.apache.shiro.ee.servlet.ShiroFilter</filter-class> -->
-	<!-- </filter> -->
-
-	<!-- <filter-mapping> -->
-	<!-- <filter-name>ShiroFilter</filter-name> -->
-	<!-- <url-pattern>/*</url-pattern> -->
-	<!-- </filter-mapping> -->
 
 </web-app>
