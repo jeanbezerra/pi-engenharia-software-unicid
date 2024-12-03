@@ -9,6 +9,8 @@ import com.github.jeanbezerra.ecommerce.web.portal.dto.ProdutoDTO;
 import com.github.jeanbezerra.ecommerce.web.portal.entity.CartItem;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named
@@ -50,6 +52,18 @@ public class CartController implements Serializable {
         cartItems.add(newItem);
         recalculateTotal();
     }
+    
+    public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+    
+    public void removeItemMessage() {
+        addMessage(FacesMessage.SEVERITY_INFO, "Informação", "Item removido do carrinho com sucesso");
+    }
+    public void removeAllItens() {
+        addMessage(FacesMessage.SEVERITY_INFO, "Informação", "Carrinho vazio!");
+    }
 
     /**
      * Remove um item do carrinho.
@@ -59,6 +73,8 @@ public class CartController implements Serializable {
     public void removeFromCart(Long productId) {
         cartItems.removeIf(item -> item.getProduct().getId().equals(productId));
         recalculateTotal();
+        
+        removeItemMessage();
     }
 
     /**
@@ -83,6 +99,7 @@ public class CartController implements Serializable {
     public void clearCart() {
         cartItems.clear();
         total = BigDecimal.ZERO;
+        removeAllItens();
     }
 
     /**
